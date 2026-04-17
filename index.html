@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 圖片與影片生成站</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI 圖片 & 影片 生成</h1>
+        <form id="genForm">
+            <label for="prompt">描述文字 (Prompt)：</label>
+            <textarea id="prompt" name="prompt" rows="3" required placeholder="例如：a futuristic city at night"></textarea>
+            
+            <label for="type">生成類型：</label>
+            <select id="type" name="type">
+                <option value="image">圖片</option>
+                <option value="video">影片</option>
+            </select>
+            
+            <!-- 影片進階選項 -->
+            <div id="videoOptions" class="advanced-options" style="display: none;">
+                <h3>影片進階選項</h3>
+                
+                <label for="videoDuration">影片長度：</label>
+                <select id="videoDuration" name="videoDuration">
+                    <option value="5" selected>5 秒</option>
+                </select>
+                
+                <label for="videoResolution">解析度：</label>
+                <select id="videoResolution" name="videoResolution">
+                    <option value="480p" selected>480p (推薦)</option>
+                </select>
+                
+                <label for="videoStyle">影片風格：</label>
+                <select id="videoStyle" name="videoStyle">
+                    <option value="" selected>預設</option>
+                    <option value="cinematic">電影感</option>
+                    <option value="vlog">Vlog</option>
+                    <option value="animation">動畫</option>
+                </select>
+            </div>
+            
+            <!-- 圖片進階選項 -->
+            <div id="imageOptions" class="advanced-options">
+                <h3>圖片進階選項</h3>
+                
+                <label for="imageSize">圖片尺寸：</label>
+                <select id="imageSize" name="imageSize">
+                    <option value="1024x1024" selected>1024x1024 (正方形)</option>
+                    <option value="1792x1024">1792x1024 (橫向)</option>
+                    <option value="1024x1792">1024x1792 (直向)</option>
+                </select>
+                
+                <label for="imageCount">生成數量：</label>
+                <select id="imageCount" name="imageCount">
+                    <option value="1" selected>1 張</option>
+                    <option value="2">2 張</option>
+                    <option value="3">3 張</option>
+                    <option value="4">4 張</option>
+                </select>
+            </div>
+            
+            <!-- 圖片生圖功能 -->
+            <div id="imageToImageSection" class="image-to-image-section">
+                <h3>圖片生圖 (Image-to-Image)</h3>
+                <p class="hint">上傳一張參考圖片，AI 將基於該圖片進行風格轉換或修改</p>
+                
+                <label class="upload-label" for="referenceImage">
+                    <span id="uploadText">📁 選擇參考圖片</span>
+                    <input type="file" id="referenceImage" name="referenceImage" accept="image/*">
+                </label>
+                <div id="imagePreview" class="image-preview"></div>
+                <button type="button" id="clearImage" class="clear-btn" style="display: none;">清除圖片</button>
+            </div>
+            
+            <button type="submit" id="submitBtn">產生</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

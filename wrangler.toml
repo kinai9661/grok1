@@ -1,0 +1,10 @@
+name = "ai-generator"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Cloudflare Pages 部署時不需要此檔案
+# 此檔案僅用於 Cloudflare Workers 部署
+
+[vars]
+# 環境變數請在 Cloudflare Dashboard 設定
+# API_KEY = "your-api-key-here"
