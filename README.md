@@ -43,7 +43,7 @@
    - 點選「Settings」→「Environment variables」
    - 新增變數：
      - **Variable name**: `API_KEY`
-     - **Value**: ``
+     - **Value**: `gk-3c25e655bf951d96aca89b240bfdf9515987416c6591319a`
    - 點選「Save」
    - 重新部署以套用變更
 

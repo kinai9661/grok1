@@ -3,81 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 圖片與影片生成站</title>
+    <title>AI Image & Video Generator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>AI 圖片 & 影片 生成</h1>
+        <!-- 語言切換 -->
+        <div class="lang-switch">
+            <button id="langZh" class="lang-btn active">中文</button>
+            <button id="langEn" class="lang-btn">English</button>
+        </div>
+        
+        <h1 id="title">AI 圖片 & 影片 生成</h1>
         <form id="genForm">
-            <label for="prompt">描述文字 (Prompt)：</label>
+            <label for="prompt" id="labelPrompt">描述文字 (Prompt)：</label>
             <textarea id="prompt" name="prompt" rows="3" required placeholder="例如：a futuristic city at night"></textarea>
             
-            <label for="type">生成類型：</label>
+            <label for="type" id="labelType">生成類型：</label>
             <select id="type" name="type">
-                <option value="image">圖片</option>
-                <option value="video">影片</option>
+                <option value="image" data-zh="圖片" data-en="Image">圖片</option>
+                <option value="video" data-zh="影片" data-en="Video">影片</option>
             </select>
             
             <!-- 影片進階選項 -->
             <div id="videoOptions" class="advanced-options" style="display: none;">
-                <h3>影片進階選項</h3>
+                <h3 id="videoOptionsTitle">影片進階選項</h3>
                 
-                <label for="videoDuration">影片長度：</label>
+                <label for="videoDuration" id="labelVideoDuration">影片長度：</label>
                 <select id="videoDuration" name="videoDuration">
                     <option value="5" selected>5 秒</option>
                 </select>
                 
-                <label for="videoResolution">解析度：</label>
+                <label for="videoResolution" id="labelVideoResolution">解析度：</label>
                 <select id="videoResolution" name="videoResolution">
-                    <option value="480p" selected>480p (推薦)</option>
+                    <option value="480p" selected>480p</option>
                 </select>
                 
-                <label for="videoStyle">影片風格：</label>
+                <label for="videoStyle" id="labelVideoStyle">影片風格：</label>
                 <select id="videoStyle" name="videoStyle">
-                    <option value="" selected>預設</option>
-                    <option value="cinematic">電影感</option>
-                    <option value="vlog">Vlog</option>
-                    <option value="animation">動畫</option>
+                    <option value="" selected data-zh="預設" data-en="Default">預設</option>
+                    <option value="cinematic" data-zh="電影感" data-en="Cinematic">電影感</option>
+                    <option value="vlog" data-zh="Vlog" data-en="Vlog">Vlog</option>
+                    <option value="animation" data-zh="動畫" data-en="Animation">動畫</option>
                 </select>
             </div>
             
             <!-- 圖片進階選項 -->
             <div id="imageOptions" class="advanced-options">
-                <h3>圖片進階選項</h3>
+                <h3 id="imageOptionsTitle">圖片進階選項</h3>
                 
-                <label for="imageSize">圖片尺寸：</label>
+                <label for="imageSize" id="labelImageSize">圖片尺寸：</label>
                 <select id="imageSize" name="imageSize">
-                    <option value="1024x1024" selected>1024x1024 (正方形)</option>
-                    <option value="1792x1024">1792x1024 (橫向)</option>
-                    <option value="1024x1792">1024x1792 (直向)</option>
+                    <option value="1024x1024" selected>1:1 (1024x1024)</option>
+                    <option value="768x1024">3:4 (768x1024)</option>
+                    <option value="1024x768">4:3 (1024x768)</option>
+                    <option value="1792x1024">16:9 (1792x1024)</option>
+                    <option value="1024x1792">9:16 (1024x1792)</option>
                 </select>
                 
-                <label for="imageCount">生成數量：</label>
+                <label for="imageCount" id="labelImageCount">生成數量：</label>
                 <select id="imageCount" name="imageCount">
-                    <option value="1" selected>1 張</option>
-                    <option value="2">2 張</option>
-                    <option value="3">3 張</option>
-                    <option value="4">4 張</option>
+                    <option value="1" selected data-zh="1 張" data-en="1 image">1 張</option>
+                    <option value="2" data-zh="2 張" data-en="2 images">2 張</option>
+                    <option value="3" data-zh="3 張" data-en="3 images">3 張</option>
+                    <option value="4" data-zh="4 張" data-en="4 images">4 張</option>
                 </select>
             </div>
             
             <!-- 圖片生圖功能 -->
             <div id="imageToImageSection" class="image-to-image-section">
-                <h3>圖片生圖 (Image-to-Image)</h3>
-                <p class="hint">上傳一張參考圖片，AI 將基於該圖片進行風格轉換或修改</p>
+                <h3 id="i2iTitle">圖片生圖 (Image-to-Image)</h3>
+                <p class="hint" id="i2iHint">上傳一張參考圖片，AI 將基於該圖片進行風格轉換或修改</p>
                 
                 <label class="upload-label" for="referenceImage">
                     <span id="uploadText">📁 選擇參考圖片</span>
                     <input type="file" id="referenceImage" name="referenceImage" accept="image/*">
                 </label>
                 <div id="imagePreview" class="image-preview"></div>
-                <button type="button" id="clearImage" class="clear-btn" style="display: none;">清除圖片</button>
+                <button type="button" id="clearImage" class="clear-btn" style="display: none;" data-zh="清除圖片" data-en="Clear">清除圖片</button>
             </div>
             
-            <button type="submit" id="submitBtn">產生</button>
+            <button type="submit" id="submitBtn" data-zh="產生" data-en="Generate">產生</button>
         </form>
+        
+        <!-- 生成結果 -->
         <div id="result" class="result"></div>
+        
+        <!-- 歷史記錄 -->
+        <div id="historySection" class="history-section">
+            <h3 id="historyTitle">生成記錄</h3>
+            <button type="button" id="clearHistory" class="clear-history-btn" data-zh="清除記錄" data-en="Clear History">清除記錄</button>
+            <div id="historyList" class="history-list"></div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

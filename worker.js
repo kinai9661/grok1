@@ -53,9 +53,11 @@ const INDEX_HTML = `<!DOCTYPE html>
                 
                 <label for="imageSize">圖片尺寸：</label>
                 <select id="imageSize" name="imageSize">
-                    <option value="1024x1024" selected>1024x1024 (正方形)</option>
-                    <option value="1792x1024">1792x1024 (橫向)</option>
-                    <option value="1024x1792">1024x1792 (直向)</option>
+                <option value="1024x1024" selected>1:1 (1024x1024)</option>
+                <option value="768x1024">3:4 (768x1024)</option>
+                <option value="1024x768">4:3 (1024x768)</option>
+                <option value="1792x1024">16:9 (1792x1024)</option>
+                <option value="1024x1792">9:16 (1024x1792)</option>
                 </select>
                 
                 <label for="imageCount">生成數量：</label>
